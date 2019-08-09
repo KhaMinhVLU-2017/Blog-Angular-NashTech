@@ -1,6 +1,8 @@
 .leftbar {
   background: #e6e6e6;
   height: 100vh;
+  position: fixed;
+  z-index: 10;
 }
 .leftmain{
   padding: 50px;
@@ -47,7 +49,14 @@
 }
 .right-bar-first{
   height: 100vh;
+  background: linear-gradient( rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.91) ),url('../../assets/images/nature.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 .bar-first-first{
   margin-top: 100px;
+}
+.div-intro > h2 {
+  color: white;
 }
