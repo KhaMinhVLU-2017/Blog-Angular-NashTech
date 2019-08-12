@@ -1,16 +1,11 @@
-<div class="col-md-12 col-sm-12 col-lg-12">
-  <h1 class="detail-title">Or It’s Now The End of Smartphones?</h1>
-  <p class="detail-sub-title">JudasFate <span>-</span> 8-12-2019</p>
-  <img class="detail-img" src="../../assets/images/purple.jpg" />
+<div *ngIf='Blog' class="col-md-12 col-sm-12 col-lg-12">
+  <h1 class="detail-title">{{Blog.title}}</h1>
+  <p class="detail-sub-title">{{Blog.authorName}} <span>-</span> {{Blog.crDate}}</p>
+  <img class="detail-img" [src]='Blog.picture' />
   <div class="col-md-8 col-sm-8 col-lg-8 offset-md-2 offset-sm-2 offset-lg-2 detail-content">
-    Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.
-    Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river
-    named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country in
-    which roasted parts of sentences fly into your mouth. Even the all-powerful Pointing has no control about the blind
-    texts it is an almost unorthographic life One day however a small line.
-
-    I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my
-    talents. I should be incapable of drawing a single stroke at the present
+    <markdown ngPreserveWhitespaces>
+      {{Blog.content}}
+    </markdown>
   </div>
   <div class="col-md-8 col-sm-8 col-lg-8 offset-md-2 offset-sm-2 offset-lg-2 detail-near">
     <p class="detail-near-title">Comment</p>
@@ -18,7 +13,6 @@
     <button class="btn btn-outline-secondary">Send</button>
   </div>
   <div class="col-md-8 col-sm-8 col-lg-8 offset-md-2 offset-sm-2 offset-lg-2 detail-commented">
-    <p>Hello world</p>
-    <p>Hello world</p>
+    <p *ngFor='let item of Blog.listComment'><strong>{{item.authorComment}}: </strong>{{item.content}}</p>
   </div>
 </div>

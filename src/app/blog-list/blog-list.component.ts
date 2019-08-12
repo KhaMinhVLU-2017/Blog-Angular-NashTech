@@ -6,7 +6,10 @@ import * as API from '../services/config'
 @Component({
   selector: 'blog-list',
   templateUrl: './blog-list.component.html',
-  styleUrls: ['./blog-list.component.css']
+  styleUrls: ['./blog-list.component.css'],
+  host: {
+    class: 'col-md-12 col-sm-12 col-lg-12'
+  }
 })
 
 export class BlogList implements OnInit {

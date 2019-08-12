@@ -10,9 +10,10 @@ import {BlogCreate} from './blog-create/blog-create.component'
 import {AccountLayout} from './account/account-layout.component'
 import {AccountLogin} from './account/login/login.component'
 import {AccountRegister} from './account/register/register.component'
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClientModule,HttpClient} from '@angular/common/http'
 import {BlogServices} from './services/blog.service'
 import { RouterModule, Routes } from '@angular/router'
+import {MarkdownModule,MarkedOptions} from 'ngx-markdown'
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -29,7 +30,22 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    MarkdownModule.forRoot({
+      loader: HttpClient, // optional, only if you use [src] attribute
+      markedOptions: {
+        provide: MarkedOptions,
+        useValue: {
+          gfm: true,
+          tables: true,
+          breaks: false,
+          pedantic: false,
+          sanitize: false,
+          smartLists: true,
+          smartypants: false,
+        },
+      },
+    })
   ],
   providers: [BlogServices],
   bootstrap: [AppComponent]
