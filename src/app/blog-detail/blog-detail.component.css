@@ -1,0 +1,49 @@
+
+.detail-title {
+  text-align: center;
+  font-family: initial;
+  margin-top: 35px;
+}
+
+.detail-sub-title {
+  text-align: center;
+  font-family: cursive;
+}
+.detail-sub-title > span {
+  color: red;
+}
+
+.detail-img {
+  margin: 0 auto;
+  display: flex;
+  border-radius: 35px;
+  width: 600px;
+  box-shadow: 1px 1px 20px 6px #171515;
+}
+
+.detail-content {
+  margin-top: 50px;
+  text-align: justify;
+  word-break: break-word;
+}
+
+.detail-near {
+  margin: 50px auto;
+}
+
+.detail-near-title {
+  font-size: 25px;
+  font-weight: bold;
+  font-family: cursive
+}
+.detail-near > button {
+  text-align: right;
+  margin-top: 20px;
+  float: right;
+}
+
+.detail-commented {
+  margin: 100px auto 20px auto;
+  box-shadow: 1px 1px 11px 7px dimgrey;
+  padding: 10px;
+}

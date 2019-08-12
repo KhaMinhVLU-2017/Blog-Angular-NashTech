@@ -60,3 +60,35 @@
 .div-intro > h2 {
   color: white;
 }
+
+.footer-right {
+  word-break: break-word;
+  background: #1c2433;
+  color: white;
+}
+.footer-right > div {
+  margin: 0 auto;
+}
+
+.footer-right-ul >li:nth-child(1) {
+  margin: 20px 0px;
+  font-family: initial;
+  font-weight: bold;
+  font-size: 28px;
+  color: white;
+}
+
+.footer-right-ul > li {
+  margin: 7px 0;
+  color: #9292a5;
+}
+
+.footer-last {
+  background: #151421;
+  color: #9e9797;
+  text-align: right;
+}
+
+.footer-last > div > p {
+  margin: 15px 0;
+} 

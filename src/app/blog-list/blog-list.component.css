@@ -6,3 +6,27 @@
   font-weight: bold;
   font-family: cursive;
 }
+
+.mycard{
+  width: 18rem;
+  margin-top: 15px !important;
+  overflow: hidden;
+}
+
+.rowCard > div {
+  margin: 0 auto;
+}
+
+.mycard-img {
+  height: 220px;
+}
+
+.mycard:hover > .mycard-img {
+  transition: 0.5s;
+  transform: scale(1.2);
+}
+.mycard:not(:hover) > .mycard-img {
+  transition: 0.5s;
+  transform: scale(1);
+}
+

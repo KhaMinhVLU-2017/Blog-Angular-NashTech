@@ -10,6 +10,16 @@ import {BlogCreate} from './blog-create/blog-create.component'
 import {AccountLayout} from './account/account-layout.component'
 import {AccountLogin} from './account/login/login.component'
 import {AccountRegister} from './account/register/register.component'
+import {HttpClientModule} from '@angular/common/http'
+import {BlogServices} from './services/blog.service'
+import { RouterModule, Routes } from '@angular/router'
+
+const routes: Routes = [
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'home', component: BlogList },
+  { path: 'blog/:id', component: BlogDetail}
+];
+
 
 @NgModule({
   declarations: [
@@ -17,9 +27,11 @@ import {AccountRegister} from './account/register/register.component'
     BlogDetail,BlogEdit,BlogList,AccountLayout,AccountLogin,AccountRegister
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule,
+    RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [BlogServices],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
