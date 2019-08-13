@@ -1,5 +1,6 @@
 import { Component, Injectable, OnInit } from '@angular/core'
 import { BlogServices } from '../services/blog.service'
+import {UserService} from '../services/user.service'
 
 @Injectable()
 @Component({
@@ -9,43 +10,30 @@ import { BlogServices } from '../services/blog.service'
 })
 
 export class LayoutComponent implements OnInit {
-  constructor(private blog: BlogServices) {
+  screen: boolean
+  screenBlog : boolean
+
+  constructor(private blog: BlogServices,private _User: UserService) {
     // this.blog.getList()
     // .subscribe(data => {console.log(data)})
     // Note
-    console.log('Contructor')
+    this.screen = false
+    this.screenBlog = false
+    console.log('Contructor',_User.currentUser)
   }
 
   ngOnInit() {
-    // this.blog.getList()
-    //   .subscribe(data => { console.log('NgOnInit',data) })
 
-    // this.blog.getDetailBlog(18)
-    // .subscribe(data => { console.log('DetailBlog',data) })
-
-    // Post Done
-    // let formData = new FormData()
-    // formData.set('Title', 'Title')
-    // formData.set('Sapo', ' nen satoi')
-    // formData.set('Content', 'princisle')
-    // formData.set('file','loida')
-
-    // this.blog.postCreateBlog(formData)
-    //   .subscribe(data => { console.log('create',data) })
-
-    // let formData = new FormData()
-    // formData.set('id', '100')
-    // this.blog.postDeleteBlog(formData)
-    //    .subscribe(data => { console.log('create',data) })
-
-    //  let formData = new FormData()
-    // formData.set('Title', 'Title')
-    // formData.set('Sapo', ' nen satoi')
-    // formData.set('Content', 'princisle')
-    // formData.set('file','loida')
-    // formData.set('Picture','KeepNew')
-    // this.blog.postEditBlog(formData)
-    //     .subscribe(data => { console.log('create',data) })
   }
 
+  toggleBlog(){
+    this.screenBlog = !this.screenBlog
+  }
+  toggle(){
+    this.screen = !this.screen
+  }
+
+  logout(){
+    this._User.Logout()
+  }
 }

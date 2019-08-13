@@ -44,7 +44,8 @@ export class BlogList implements OnInit {
           return item
         })
 
-        this.ListBlog = blogHanlder.slice(0,6)
+        //this.ListBlog = blogHanlder.slice(0,6)
+        this.ListBlog = blogHanlder
       },
         err => {
           console.log(err)

@@ -15,7 +15,7 @@
         <h5 class="card-title">{{item.title}}</h5>
         <p class="card-text">{{item.sapo}}</p>
         <br *ngIf='item.sapo.length < 50'/>
-        <a [routerLink]="[ '/blog', item.blogID ]" class="btn btn-outline-secondary">Go more</a>
+        <a [routerLink]="[ 'blog', item.blogID ]" class="btn btn-outline-secondary">Go more</a>
       </div>
     </div>
   </div>

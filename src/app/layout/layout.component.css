@@ -92,3 +92,42 @@
 .footer-last > div > p {
   margin: 15px 0;
 } 
+
+.parent-li-dialog {
+  position: relative;
+  cursor: pointer;
+}
+
+.visible {
+  visibility: visible;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.ul-dialog {
+  background: white;
+  padding: 0;
+  position: absolute;
+  left: 120px;
+  box-shadow: 1px 1px 4px 2px #423a3a;
+  padding: 5px;
+  width: 100px;
+  visibility: hidden;
+  border-radius: 20px;
+}
+
+.btnOut {
+  border: none;
+  width: 100%;
+  background: white;
+  border-radius: 20px;
+}
+
+.btnOut:hover {
+  transition: 0.5s;
+  background: #5caafb;
+  color: white;
+  font-weight: bold;
+}

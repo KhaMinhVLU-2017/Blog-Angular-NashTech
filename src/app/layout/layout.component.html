@@ -6,8 +6,23 @@
       <div class="div-main">
         <ul class="ul-main" type='none'>
           <li><a routerLink='/home'>Home</a></li>
-          <li>Blog</li>
-          <li>Login</li>
+          <li class="parent-li-dialog" (click)='toggleBlog()'>Blog<i class="material-icons"> arrow_drop_down </i>
+            <ul [className]="screenBlog ? 'ul-dialog visible' : 'ul-dialog invisible'" type='none'>
+              <li><button class="btnOut" >CreatePost</button></li>
+            </ul>
+          </li>
+          <li class="parent-li-dialog" (click)='toggle()' *ngIf='_User.currentUser.fullname; else Login'>
+            {{_User.currentUser.fullname}}
+            <i class="material-icons">
+              arrow_drop_down
+            </i>
+            <ul [className]="screen ? 'ul-dialog visible' : 'ul-dialog invisible'" type='none'>
+              <li><button class="btnOut" (click)='logout()'>Logout</button></li>
+            </ul>
+          </li>
+          <ng-template #Login>
+            <li><a routerLink='/account/login'>Login</a></li>
+          </ng-template>
           <li>|</li>
         </ul>
       </div>
@@ -62,7 +77,7 @@
     </div>
     <div class="row footer-last">
       <div class="col-md-12 col-sm-12 col-lg-12">
-          <p><em>Create by JudasFate</em></p>
+        <p><em>Create by JudasFate</em></p>
       </div>
     </div>
   </div>

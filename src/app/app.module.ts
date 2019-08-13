@@ -14,11 +14,25 @@ import {HttpClientModule,HttpClient} from '@angular/common/http'
 import {BlogServices} from './services/blog.service'
 import { RouterModule, Routes } from '@angular/router'
 import {MarkdownModule,MarkedOptions} from 'ngx-markdown'
+import {UserService} from './services/user.service'
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: BlogList },
-  { path: 'blog/:id', component: BlogDetail}
+  { 
+    path: 'home', component: LayoutComponent ,
+    children:[
+      { path: '', component: BlogList},
+      { path: 'blog/:id', component: BlogDetail}
+    ]
+  },
+  { path: 'account', redirectTo: '/account/login', pathMatch: 'full' },
+  {
+    path: 'account', component: AccountLayout,
+    children:[
+      {path: 'login', component:AccountLogin},
+      {path: 'register', component: AccountRegister}
+    ]
+  }
 ];
 
 
@@ -47,7 +61,7 @@ const routes: Routes = [
       },
     })
   ],
-  providers: [BlogServices],
+  providers: [BlogServices,UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
