@@ -9,8 +9,11 @@
   </div>
   <div class="col-md-8 col-sm-8 col-lg-8 offset-md-2 offset-sm-2 offset-lg-2 detail-near">
     <p class="detail-near-title">Comment</p>
-    <textarea class="form-control" rows="3"></textarea>
-    <button class="btn btn-outline-secondary">Send</button>
+    <p class="aler alert-warning" *ngIf='!_User.currentUser.fullname; else TextComment'>Please login for comment</p>
+    <ng-template #TextComment>
+      <textarea class="form-control" rows="3"></textarea>
+      <button class="btn btn-outline-secondary">Send</button>
+    </ng-template>
   </div>
   <div class="col-md-8 col-sm-8 col-lg-8 offset-md-2 offset-sm-2 offset-lg-2 detail-commented">
     <p *ngFor='let item of Blog.listComment'><strong>{{item.authorComment}}: </strong>{{item.content}}</p>

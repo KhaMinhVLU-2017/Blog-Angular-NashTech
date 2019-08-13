@@ -19,7 +19,6 @@ export class LayoutComponent implements OnInit {
     // Note
     this.screen = false
     this.screenBlog = false
-    console.log('Contructor',_User.currentUser)
   }
 
   ngOnInit() {

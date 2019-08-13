@@ -22,7 +22,8 @@ const routes: Routes = [
     path: 'home', component: LayoutComponent ,
     children:[
       { path: '', component: BlogList},
-      { path: 'blog/:id', component: BlogDetail}
+      { path: 'blog/:id', component: BlogDetail},
+      { path: 'create', component: BlogCreate}
     ]
   },
   { path: 'account', redirectTo: '/account/login', pathMatch: 'full' },

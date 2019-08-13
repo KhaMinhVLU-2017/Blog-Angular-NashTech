@@ -1,6 +1,7 @@
 import { Component, OnInit, Injectable } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { BlogServices } from '../services/blog.service'
+import { UserService } from '../services/user.service'
 import * as API from '../services/config'
 
 @Component({
@@ -15,7 +16,7 @@ import * as API from '../services/config'
 export class BlogDetail implements OnInit {
   paramID: string
   Blog: {}
-  constructor(private activeRoute: ActivatedRoute, private blogSer: BlogServices) {
+  constructor(private activeRoute: ActivatedRoute, private blogSer: BlogServices, private _User: UserService) {
 
   }
 

@@ -34,8 +34,9 @@ export class UserService {
     this.currentUser={}
   }
 
-  Register(){
-
+  Register(user: FormData){
+    let urlAPI = `${API.urlAPI}/account/register`
+    return this.http.post(urlAPI,user)
   }
 
 }
