@@ -19,6 +19,7 @@ import {FirstUpper} from './pipe/firsupper.pipe'
 import { AngularEditorModule } from '@kolkov/angular-editor'
 import { FormsModule } from '@angular/forms'
 import {SplitTitle} from './pipe/splitTitle.pipe'
+import {AuthGuardService} from './services/AuthGuardService.service'
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -27,7 +28,7 @@ const routes: Routes = [
     children:[
       { path: '', component: BlogList},
       { path: 'blog/:id', component: BlogDetail},
-      { path: 'create', component: BlogCreate}
+      { path: 'create', component: BlogCreate, canActivate: [AuthGuardService]}
     ]
   },
   { path: 'account', redirectTo: '/account/login', pathMatch: 'full' },
@@ -70,7 +71,7 @@ const routes: Routes = [
     FormsModule,
     AngularEditorModule
   ],
-  providers: [BlogServices,UserService],
+  providers: [BlogServices,UserService,AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

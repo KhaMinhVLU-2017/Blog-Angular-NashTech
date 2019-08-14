@@ -1,14 +1,16 @@
 import {Injectable} from '@angular/core'
 import {HttpClient} from '@angular/common/http'
+import {Router} from '@angular/router'
 import * as API from '../services/config'
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+
   currentUser: {}
 
-  constructor(private http: HttpClient){
+  constructor(private http: HttpClient, private _Router: Router){
     let fullname = localStorage.getItem('_fullname')
     let token = localStorage.getItem('_token')
     this.currentUser = {
@@ -32,6 +34,9 @@ export class UserService {
   Logout(){
     localStorage.clear()
     this.currentUser={}
+    let url = this._Router.url // url current
+    console.log(url)
+    this._Router.navigate([url])
   }
 
   Register(user: FormData){

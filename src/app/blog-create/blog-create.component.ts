@@ -22,7 +22,7 @@ export class BlogCreate {
   title: string
   sapo: string
   file: File
-
+  errorMessage: string
   constructor(private _Blog: BlogServices, private _User: UserService, private _Router: Router, private _Location: Location){
 
   }
@@ -60,7 +60,7 @@ export class BlogCreate {
         if(status === 200) {
           this._Router.navigate(['/home'])
         }else if(status === 403) {
-
+          this.errorMessage = message
         }else {
 
         }
