@@ -8,7 +8,7 @@
           <li><a routerLink='/home'>Home</a></li>
           <li class="parent-li-dialog" (click)='toggleBlog()'>Blog<i class="material-icons"> arrow_drop_down </i>
             <ul [className]="screenBlog ? 'ul-dialog visible' : 'ul-dialog invisible'" type='none'>
-              <li><button class="btnOut" >CreatePost</button></li>
+              <li><a routerLink="/home/create" class="btnOut" >CreatePost</a></li>
             </ul>
           </li>
           <li class="parent-li-dialog" (click)='toggle()' *ngIf='_User.currentUser.fullname; else Login'>

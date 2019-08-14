@@ -25,7 +25,6 @@ export class BlogDetail implements OnInit {
     this.activeRoute.paramMap
       .subscribe(params => {
         this.paramID = params.get('id')
-        console.log(this.paramID)
       })
     //this.paramID = this.activeRoute.snapshot.paramMap.get('id')
     this.blogSer.getDetailBlog(this.paramID)
@@ -38,7 +37,6 @@ export class BlogDetail implements OnInit {
         blogHanlder.picture = apiScreenIMG
 
         this.Blog = blogHanlder
-        console.log(res)
       }, err => {
 
       })

@@ -1,6 +1,6 @@
-import {Component, Injectable} from '@angular/core'
-import {Router} from '@angular/router'
-import {UserService} from '../../services/user.service'
+import { Component, Injectable } from '@angular/core'
+import { Router, ActivatedRoute } from '@angular/router'
+import { UserService } from '../../services/user.service'
 
 @Injectable()
 @Component({
@@ -12,22 +12,26 @@ import {UserService} from '../../services/user.service'
   }
 })
 
-export class AccountLogin{
+export class AccountLogin {
   username: string
   password: string
   errorMess: string
-  
-  constructor(private _user: UserService,private router: Router) {}
+  retUrl: string = null
 
-  handlChange(e,event){
-    let {name,value} = e
+  constructor(private _user: UserService, private router: Router, private activeRoute: ActivatedRoute) {
+    this.retUrl = activeRoute.snapshot.queryParams['retUrl']===undefined ? null : activeRoute.snapshot.queryParams['retUrl']
+    console.log(this.retUrl)
+  }
+
+  handlChange(e, event) {
+    let { name, value } = e
     this[name] = value
-    if(name==='password' && event.keyCode === 13) {
+    if (name === 'password' && event.keyCode === 13) {
       this.SubmitLogin()
     }
   }
 
-  SubmitLogin(){
+  SubmitLogin() {
     let form = new FormData()
     form.set('username', this.username)
     form.set('password', this.password)
@@ -35,17 +39,21 @@ export class AccountLogin{
       res => {
         let status = res['status']
         let message = res['message']
-        let fullname =res['fullname']
+        let fullname = res['fullname']
         let token = res['token']
-        if(status === 200) {
-          this._user.setUser(fullname,token)
-          this.router.navigate(['/home'])
-        }else
-        if(status===403) {
-          this.errorMess = message
-        }else{
-          this.errorMess = message
-        }
+        if (status === 200) {
+          this._user.setUser(fullname, token)
+          if (this.retUrl !== null) {
+            this.router.navigate([this.retUrl])
+          } else {
+            this.router.navigate(['/home'])
+          }
+        } else
+          if (status === 403) {
+            this.errorMess = message
+          } else {
+            this.errorMess = message
+          }
       },
       err => {
         console.log(err)

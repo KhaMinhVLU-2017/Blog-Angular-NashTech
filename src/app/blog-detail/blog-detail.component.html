@@ -1,10 +1,10 @@
 <div *ngIf='Blog' class="col-md-12 col-sm-12 col-lg-12">
-  <h1 class="detail-title">{{Blog.title}}</h1>
-  <p class="detail-sub-title">{{Blog.authorName}} <span>-</span> {{Blog.crDate}}</p>
+  <h1 class="detail-title">{{Blog.title | firstUpper}}</h1>
+  <p class="detail-sub-title">{{Blog.authorName}} <span>-</span> {{Blog.crDate | date}}</p>
   <img class="detail-img" [src]='Blog.picture' />
   <div class="col-md-8 col-sm-8 col-lg-8 offset-md-2 offset-sm-2 offset-lg-2 detail-content">
     <markdown ngPreserveWhitespaces>
-      {{Blog.content}}
+      {{Blog.content }}
     </markdown>
   </div>
   <div class="col-md-8 col-sm-8 col-lg-8 offset-md-2 offset-sm-2 offset-lg-2 detail-near">

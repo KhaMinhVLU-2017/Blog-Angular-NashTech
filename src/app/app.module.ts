@@ -15,6 +15,11 @@ import {BlogServices} from './services/blog.service'
 import { RouterModule, Routes } from '@angular/router'
 import {MarkdownModule,MarkedOptions} from 'ngx-markdown'
 import {UserService} from './services/user.service'
+import {FirstUpper} from './pipe/firsupper.pipe'
+import { AngularEditorModule } from '@kolkov/angular-editor'
+import { FormsModule } from '@angular/forms'
+import {SplitTitle} from './pipe/splitTitle.pipe'
+import {AuthGuardService} from './services/AuthGuardService.service'
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -23,7 +28,7 @@ const routes: Routes = [
     children:[
       { path: '', component: BlogList},
       { path: 'blog/:id', component: BlogDetail},
-      { path: 'create', component: BlogCreate}
+      { path: 'create', component: BlogCreate, canActivate: [AuthGuardService]}
     ]
   },
   { path: 'account', redirectTo: '/account/login', pathMatch: 'full' },
@@ -40,7 +45,9 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,LayoutComponent,BlogCreate,
-    BlogDetail,BlogEdit,BlogList,AccountLayout,AccountLogin,AccountRegister
+    BlogDetail,BlogEdit,BlogList,AccountLayout,AccountLogin,AccountRegister,
+    FirstUpper,
+    SplitTitle
   ],
   imports: [
     BrowserModule,
@@ -60,9 +67,11 @@ const routes: Routes = [
           smartypants: false,
         },
       },
-    })
+    }),
+    FormsModule,
+    AngularEditorModule
   ],
-  providers: [BlogServices,UserService],
+  providers: [BlogServices,UserService,AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

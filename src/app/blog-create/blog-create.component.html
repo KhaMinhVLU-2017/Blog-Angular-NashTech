@@ -1,12 +1,17 @@
 <div class="row">
+  <div class="col-md-12 col-sm-12 col-lg-12 text-center">
+    <h1>Create Post</h1>
+  </div>
   <div class="col-md-6 col-sm-6 col-lg-6">
     <div class="form-group">
       <label for="Title">Title</label>
-      <input type="text" name='title' class="form-control" id="Title" placeholder="Da Lat The city many dreams" />
+      <input type="text" name='title' #title (keyup)='handlChange(title)' class="form-control" id="Title"
+        placeholder="Da Lat The city many dreams" />
     </div>
     <div class="form-group">
       <label for="Sapo">Sapo</label>
-      <textarea type="text" name='sapo' class="form-control" id="Sapo" placeholder="Description"></textarea>
+      <textarea type="text" name='sapo' #sapo (keyup)='handlChange(sapo)' class="form-control" id="Sapo"
+        placeholder="Description"></textarea>
     </div>
   </div>
   <div class="col-md-6 col-sm-6 col-lg-6">
@@ -17,5 +22,19 @@
     <div class="form-group">
       <img *ngIf='images' [src]="images" class="img-thumbnail" alt="Blog Image" />
     </div>
+  </div>
+  <div class="col-md-12 col-sm-12 col-lg-12">
+    <div class="form-group">
+      <label for="Content">Content</label>
+      <angular-editor [config]='config' [placeholder]="'Enter text here...'" [(ngModel)]="htmlContent"></angular-editor>
+    </div>
+    <p class="alert alert-danger" *ngIf='errorMessage'>{{errorMessage}}</p>
+  </div>
+  <div class="col-md-6 col-md-6 col-lg-6 m-50">
+  </div>
+  <div class="col-md-6 col-md-6 col-lg-6 divSave m-50">
+    <button (click)='goBack()' class="btn btn-danger">Cancel</button>
+    {{' '}}
+    <button class="btn btn-success" (click)='submitServer()'>Save</button>
   </div>
 </div>
