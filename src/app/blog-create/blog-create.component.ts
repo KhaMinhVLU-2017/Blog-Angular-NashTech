@@ -1,9 +1,9 @@
-import {Component, Injectable} from '@angular/core'
-import {AngularEditorConfig} from '@kolkov/angular-editor'
+import { Component, Injectable } from '@angular/core'
+import { AngularEditorConfig } from '@kolkov/angular-editor'
 import * as API from '../services/config'
-import {BlogServices} from '../services/blog.service'
-import {UserService} from '../services/user.service'
-import {Router} from '@angular/router'
+import { BlogServices } from '../services/blog.service'
+import { UserService } from '../services/user.service'
+import { Router } from '@angular/router'
 import { Location } from '@angular/common';
 
 @Injectable()
@@ -12,33 +12,33 @@ import { Location } from '@angular/common';
   templateUrl: './blog-create.component.html',
   styleUrls: ['./blog-create.component.css'],
   host: {
-    class:'col-md-12 col-sm-12 col-lg-12'
+    class: 'col-md-12 col-sm-12 col-lg-12'
   }
 })
 
 export class BlogCreate {
-  images : any
+  images: any
   htmlContent: string
   title: string
   sapo: string
   file: File
   errorMessage: string
-  constructor(private _Blog: BlogServices, private _User: UserService, private _Router: Router, private _Location: Location){
-
+  constructor(private _Blog: BlogServices, private _User: UserService, private _Router: Router, private _Location: Location) {
+  
   }
-  goBack(){
+  goBack() {
     this._Location.back()
   }
 
-  handlChange(e){
-    let {value,name} = e
+  handlChange(e) {
+    let { value, name } = e
     this[name] = value
   }
 
-  handChangeIMG(e){
+  handChangeIMG(e) {
     let file = e.target.files[0]
     this.file = file
-    let reader  = new FileReader()
+    let reader = new FileReader()
     reader.onload = () => {
       let dataURL = reader.result
       this.images = dataURL.toString()
@@ -46,25 +46,25 @@ export class BlogCreate {
     reader.readAsDataURL(file)
   }
 
-  submitServer(){
+  submitServer() {
     let formData = new FormData()
-    formData.set('Title',this.title)
-    formData.set('Content',this.htmlContent)
-    formData.set('Sapo',this.sapo)
-    formData.set('file',this.file) // file img
+    formData.set('Title', this.title)
+    formData.set('Content', this.htmlContent)
+    formData.set('Sapo', this.sapo)
+    formData.set('file', this.file) // file img
     let token = this._User.currentUser['token']
-    this._Blog.postCreateBlog(formData,token)
-      .subscribe(res=>{
+    this._Blog.postCreateBlog(formData, token)
+      .subscribe(res => {
         let status = res['status']
         let message = res['message']
-        if(status === 200) {
+        if (status === 200) {
           this._Router.navigate(['/home'])
-        }else if(status === 403) {
+        } else if (status === 403) {
           this.errorMessage = message
-        }else {
+        } else {
 
         }
-      },err =>{
+      }, err => {
         console.log(err)
       })
   }

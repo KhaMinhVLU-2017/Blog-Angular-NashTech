@@ -10,20 +10,21 @@ export class AuthGuardService implements CanActivate {
 
 
   constructor(private _router: Router, private _User: UserService) {
+    this._User.subEventRejectUser.subscribe(value => {
 
+    })
   }
 
   canActivate(route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
     let UserFullName = this._User.currentUser['fullname']
-    console.log('CheckRoute DIrect',UserFullName)
-    //check some condition
-    if (UserFullName) {
-    
-      return true;
 
+    //check some condition
+    if (UserFullName) {  
+      return true;
     } 
     this._router.navigate(["/account/login"],{ queryParams: { retUrl:state.url} })
     return false;
   }
+
 }
