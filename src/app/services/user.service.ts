@@ -21,11 +21,11 @@ export class UserService {
       if (value) {
         localStorage.clear()
         this.currentUser = {}
-        let url = this._Router.url // url current
+        //let url = this._Router.url // url current
         // this._Router.navigateByUrl('/home', { skipLocationChange: true }).then(() =>
         //   this._Router.navigate([url]))
         // //console.log(url)
-        this._Router.navigateByUrl(url)
+        //this._Router.navigate(['home'])
       }
     })
 
