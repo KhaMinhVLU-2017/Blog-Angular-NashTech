@@ -15,6 +15,10 @@ import {BlogServices} from './services/blog.service'
 import { RouterModule, Routes } from '@angular/router'
 import {MarkdownModule,MarkedOptions} from 'ngx-markdown'
 import {UserService} from './services/user.service'
+import {FirstUpper} from './pipe/firsupper.pipe'
+import { AngularEditorModule } from '@kolkov/angular-editor'
+import { FormsModule } from '@angular/forms'
+import {SplitTitle} from './pipe/splitTitle.pipe'
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -40,7 +44,9 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,LayoutComponent,BlogCreate,
-    BlogDetail,BlogEdit,BlogList,AccountLayout,AccountLogin,AccountRegister
+    BlogDetail,BlogEdit,BlogList,AccountLayout,AccountLogin,AccountRegister,
+    FirstUpper,
+    SplitTitle
   ],
   imports: [
     BrowserModule,
@@ -60,7 +66,9 @@ const routes: Routes = [
           smartypants: false,
         },
       },
-    })
+    }),
+    FormsModule,
+    AngularEditorModule
   ],
   providers: [BlogServices,UserService],
   bootstrap: [AppComponent]

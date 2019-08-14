@@ -22,12 +22,12 @@ export class BlogServices{
     return this.http.get(apiGet,{params})
   }
   // FormData for Params
-  postCreateBlog(data: FormData){
+  postCreateBlog(data: FormData, token: string){
     let apiGet = `${API.urlAPI}/blog/Create`
-    return this.http.post(apiGet,data)
+    return this.http.post(apiGet,data,{headers:{'Authorization':token}})
   }
   //FormData
-  postDeleteBlog(data: FormData){ 
+  postDeleteBlog(data: FormData, token: string){ 
     let apiGet = `${API.urlAPI}/blog/Remove`
     return this.http.post(apiGet,data)
   }

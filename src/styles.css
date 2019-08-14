@@ -62,3 +62,7 @@
 .material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
 
 .material-icons.m-15 { margin:0 15px; }
+
+img[alt=pessi] {
+  width:400px;
+}
