@@ -24,6 +24,15 @@ export class BlogServices {
     }
     return this.http.get(apiGet,{params})
   }
+
+  getDetailBlogForAuthor(id, token: string) {
+    let apiGet = `${API.urlAPI}/blog/GetForEdit`
+    let params = { id }
+    if (token) {
+      return this.http.get(apiGet, { headers: { 'Authorization': token }, params })
+    }
+    return this.http.get(apiGet,{params})
+  }
   // FormData for Params
   postCreateBlog(data: FormData, token: string) {
     let apiGet = `${API.urlAPI}/blog/Create`

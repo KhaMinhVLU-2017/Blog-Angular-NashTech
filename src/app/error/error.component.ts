@@ -1,6 +1,8 @@
-import {Component} from '@angular/core'
+import {Component, Injectable} from '@angular/core'
 import {Router} from '@angular/router'
+import {UserService} from '../services/user.service'
 
+@Injectable()
 @Component({
   selector: 'error-view',
   templateUrl: './error.component.html',
@@ -11,11 +13,12 @@ import {Router} from '@angular/router'
 })
 
 export class ErrorComponent {
+ 
   second: number = 3
-
-  constructor(private _Router: Router){
+  constructor(private _Router: Router, private _User: UserService){
     this.ReloadDirect()
   }
+
 
   ReloadDirect(){
     let t = setInterval(()=>{

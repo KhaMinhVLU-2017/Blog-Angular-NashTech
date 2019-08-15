@@ -2,6 +2,7 @@ import { Component, OnInit, Injectable } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { BlogServices } from '../services/blog.service'
 import { UserService } from '../services/user.service'
+import { CommentService } from '../services/comment.service'
 import * as API from '../services/config'
 
 @Component({
@@ -15,8 +16,20 @@ import * as API from '../services/config'
 @Injectable()
 export class BlogDetail implements OnInit {
   paramID: string
-  Blog: {}
-  constructor(private _Router: Router,private activeRoute: ActivatedRoute, private blogSer: BlogServices, private _User: UserService) {
+  Blog: {
+    listComment: Array<object>
+  }
+  comment: string = null
+  isSelectComment: object = {
+    commentID: '',
+    content: '',
+    crDate: '',
+    userID: '',
+    authorComment: ''
+  }
+
+  constructor(private _Router: Router, private activeRoute: ActivatedRoute, private blogSer: BlogServices, private _User: UserService,
+    private _Comment: CommentService) {
 
   }
 
@@ -44,9 +57,101 @@ export class BlogDetail implements OnInit {
           this._Router.navigate(['error'])
         } else {
           this._User.subEventRejectUser.next(true)
+          this._Router.navigate(['home'])
         }
       }, err => {
-          console.log(err)
-        })
+        console.log(err)
+      })
+  }
+
+  handlChangeKey(e, event) {
+    let { value, name } = e
+    this[name] = value
+    if (event.keyCode === 13) {
+      this.submitComment()
+    }
+  }
+
+  submitComment() {
+    let token = this._User.currentUser['token']
+    let data = new FormData()
+    data.set('Content', this.comment)
+    data.set('BlogID', this.paramID)
+
+    this._Comment.postCreateMomment(data, token)
+      .subscribe(res => {
+        let status = res['status']
+        if (status === 200) {
+          let comment = res['comment']
+          this.Blog.listComment.unshift(comment)
+          this.comment = null
+          // Todo Logic
+        } else if (status === 403) {
+          this._User.subEventRejectUser.next(true)
+        } else {
+          this._User.subEventRejectUser.next(true)
+        }
+      }, error => {
+        console.log(error)
+      })
+  }
+
+  handCommentEdit(comment) {
+    this.isSelectComment = comment
+  }
+
+  handComSave() {
+    let comment = new FormData()
+    comment.set('Content', this.isSelectComment['content'])
+    comment.set('CommentID', this.isSelectComment['commentID'])
+    let token = this._User.currentUser['token']
+    this._Comment.postEditComment(comment, token)
+      .subscribe(res => {
+        let status = res['status']
+        if(status===200) {
+          let listCommentNew = this.Blog.listComment
+          listCommentNew.map(item => {
+            if(item['commentID'] === this.isSelectComment['commentID']) {
+              item['content'] = this.isSelectComment['content']
+              return item
+            }
+            return item
+          })
+          this.Blog.listComment = listCommentNew
+        }else if(status===403){
+          this._User.changeMessageError('Forbidden')
+        }else {
+          this._User.subEventRejectUser.next(true)
+        }
+      }, err => {
+
+      })
+  }
+
+  deleteComment(){
+    let data = new FormData()
+    data.set('commentID',this.isSelectComment['commentID'])
+    let token = this._User.currentUser['token']
+    this._Comment.postDeleteComment(data,token)
+    .subscribe(res=> {
+      let status = res['status']
+      if (status === 200) {
+        let newListComment = this.Blog.listComment
+        let commentID = this.isSelectComment['commentID']
+        newListComment = newListComment.filter(item => item['commentID']!==commentID)
+        this.Blog.listComment = newListComment
+      } else if (status === 403) {
+        this._User.subEventRejectUser.next(true)
+      } else {
+        this._User.subEventRejectUser.next(true)
+      }
+    },err => {
+      console.log(err)
+    })
+  }
+
+  keyUpComment(e) {
+    let { value } = e
+    this.isSelectComment['content'] = value
   }
 }

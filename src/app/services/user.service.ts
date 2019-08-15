@@ -11,11 +11,18 @@ export class UserService {
 
   currentUser: {}
 
+  errorMessage: string = 'Not Found 404'
+
   subEventAddUser: Subject<any> = new Subject<any>() // Add User
 
   subEventRejectUser: Subject<any> = new Subject<any>()// Destroy User
 
+  addErrorMess: Subject <any> = new Subject<any>()
+
   constructor(private http: HttpClient, private _Router: Router) {
+    this.addErrorMess.subscribe(mess => {
+      this.errorMessage = mess
+    })
 
     this.subEventRejectUser.subscribe(value => {
       if (value) {
@@ -61,6 +68,11 @@ export class UserService {
   Register(user: FormData) {
     let urlAPI = `${API.urlAPI}/account/register`
     return this.http.post(urlAPI, user)
+  }
+
+  changeMessageError(message){
+    this.addErrorMess.next(message)
+    this._Router.navigate(['**'])
   }
 
 }

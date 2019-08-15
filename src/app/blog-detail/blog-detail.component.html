@@ -1,6 +1,7 @@
 <div *ngIf='Blog' class="col-md-12 col-sm-12 col-lg-12">
   <div *ngIf='Blog.edit && _User.currentUser.fullname' class="form-group text-right firstDiv">
-    <a [routerLink]="[ '/home/edit', Blog.blogID ]" class="btn btn-warning">Edit <i class="material-icons md-24"> edit </i>
+    <a [routerLink]="[ '/home/edit', Blog.blogID ]" class="btn btn-warning">Edit <i class="material-icons md-24"> edit
+      </i>
     </a>
   </div>
   <h1 class="detail-title">{{Blog.title | firstUpper}}</h1>
@@ -8,18 +9,51 @@
   <img class="detail-img" [src]='Blog.picture' />
   <div class="col-md-8 col-sm-8 col-lg-8 offset-md-2 offset-sm-2 offset-lg-2 detail-content">
     <markdown ngPreserveWhitespaces>
-      {{Blog.content }}
+      {{Blog.content}}
     </markdown>
   </div>
   <div class="col-md-8 col-sm-8 col-lg-8 offset-md-2 offset-sm-2 offset-lg-2 detail-near">
     <p class="detail-near-title">Comment</p>
     <p class="aler alert-warning" *ngIf='!_User.currentUser.fullname; else TextComment'>Please login for comment</p>
     <ng-template #TextComment>
-      <textarea class="form-control" rows="3"></textarea>
-      <button class="btn btn-outline-secondary">Send</button>
+      <textarea name="comment" [value]='comment' #commentv (keyup)='handlChangeKey(commentv,$event)'
+        class="form-control" rows="3"></textarea>
+      <button class="btn btn-outline-secondary" (click)='submitComment()'>Send</button>
     </ng-template>
   </div>
   <div class="col-md-8 col-sm-8 col-lg-8 offset-md-2 offset-sm-2 offset-lg-2 detail-commented">
-    <p *ngFor='let item of Blog.listComment'><strong>{{item.authorComment}}: </strong>{{item.content}}</p>
+    <div *ngFor='let item of Blog.listComment'>
+      <div [ngSwitch]="item.authorComment">
+        <p *ngSwitchCase="_User.currentUser.fullname" (click)='handCommentEdit(item)'
+          data-toggle="modal" data-target="#modelComment">
+          <strong>{{item.authorComment}}: </strong>{{item.content}}
+        </p>
+        <p *ngSwitchDefault>
+          <strong>{{item.authorComment}}: </strong>{{item.content}}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modelComment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Comment</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input class="form-control" #cmContentV (keyup)='keyUpComment(cmContentV)' [value]='isSelectComment.content' />
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-danger btnDelete" (click)='deleteComment()' data-dismiss="modal">Delete comment</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" (click)='handComSave()' class="btn btn-success" data-dismiss="modal">Save</button>
+      </div>
+    </div>
   </div>
 </div>

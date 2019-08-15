@@ -5,7 +5,6 @@ import { UserService } from '../services/user.service'
 import { Location } from '@angular/common'
 import { AngularEditorConfig } from '@kolkov/angular-editor'
 import * as API from '../services/config'
-import { ConcatSource } from 'webpack-sources';
 
 @Injectable()
 @Component({
@@ -38,7 +37,7 @@ export class BlogEdit implements OnInit {
       })
     let token = this._User.currentUser['token']
   
-    this._Blog.getDetailBlog(this.paramID,token)
+    this._Blog.getDetailBlogForAuthor(this.paramID,token)
       .subscribe(res => {
         let status = res['status']
         if (status === 200) {
@@ -54,9 +53,9 @@ export class BlogEdit implements OnInit {
           this.images = `${API.urlServer}/assert/images/${picture}`
           this.blogID = blogID
         } else if (status === 403) {
-          this._User.subEventRejectUser.next(true)
+          this._User.changeMessageError('Bạn chưa có tuổi để sửa được bài viết này : ))')
         } else if(status === 404) {
-          this._router.navigate(['error'])
+          this._User.changeMessageError('Not Found 404')
         }else {
           this._User.subEventRejectUser.next(true)
         }

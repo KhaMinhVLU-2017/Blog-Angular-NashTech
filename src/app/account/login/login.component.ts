@@ -20,7 +20,6 @@ export class AccountLogin {
 
   constructor(private _user: UserService, private router: Router, private activeRoute: ActivatedRoute) {
     this.retUrl = activeRoute.snapshot.queryParams['retUrl']===undefined ? null : activeRoute.snapshot.queryParams['retUrl']
-    console.log(this.retUrl)
   }
 
   handlChange(e, event) {

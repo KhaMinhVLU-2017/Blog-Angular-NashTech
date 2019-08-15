@@ -10,9 +10,7 @@ export class AuthGuardService implements CanActivate {
 
 
   constructor(private _router: Router, private _User: UserService) {
-    this._User.subEventRejectUser.subscribe(value => {
-
-    })
+    
   }
 
   canActivate(route: ActivatedRouteSnapshot,

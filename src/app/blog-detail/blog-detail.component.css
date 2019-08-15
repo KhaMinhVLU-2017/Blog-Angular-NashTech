@@ -51,3 +51,8 @@
 .firstDiv {
   margin-top: 20px;
 }
+
+.btnDelete {
+  position: absolute;
+  left: 15px;
+}
