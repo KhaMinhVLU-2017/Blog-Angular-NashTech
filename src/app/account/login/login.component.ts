@@ -29,7 +29,9 @@ export class AccountLogin {
       this.SubmitLogin()
     }
   }
-
+  goBack(){
+    this.router.navigate(['home'])
+  }
   SubmitLogin() {
     let form = new FormData()
     form.set('username', this.username)

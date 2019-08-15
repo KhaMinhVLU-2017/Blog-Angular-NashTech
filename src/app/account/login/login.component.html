@@ -9,7 +9,7 @@
       <input name='password' type="password" #password  (keyup)="handlChange(password,$event)" class="form-control" id="Password" placeholder="Password">
     </div>
     <p *ngIf='errorMess' class="alert alert-danger">{{errorMess}}</p>
-    <button type="button" class="btn btn-danger">Cancel</button>
+    <button type="button" (click)='goBack()' class="btn btn-danger">Cancel</button>
     {{' '}}
     <button type="button" (click) = 'SubmitLogin()' class="btn btn-success">Login</button>
   </div>

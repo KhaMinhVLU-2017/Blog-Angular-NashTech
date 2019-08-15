@@ -21,7 +21,9 @@ export class AccountRegister {
   constructor(private _User: UserService, private _ruoter: Router){
 
   }
-  
+  goBack(){
+    this._ruoter.navigate(['home'])
+  }
   SubmitRegister(){
     let data = new FormData()
     data.set('username',this.username)
