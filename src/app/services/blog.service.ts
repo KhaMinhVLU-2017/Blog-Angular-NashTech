@@ -1,40 +1,44 @@
-import {Injectable} from '@angular/core'
-import {HttpClient,HttpParams} from '@angular/common/http'
+import { Injectable } from '@angular/core'
+import { HttpClient, HttpParams } from '@angular/common/http'
 import * as API from './config'
-import {Observable} from 'rxjs'
+import { Observable } from 'rxjs'
 
 @Injectable({
   providedIn: 'root'
 })
-export class BlogServices{
-  
+export class BlogServices {
+
   constructor(private http: HttpClient) {
   }
 
-  getList(){
+  getList() {
     let apiGet = `${API.urlAPI}/blog/List`
     return this.http.get(apiGet)
   }
 
-  getDetailBlog(id){
+  getDetailBlog(id, token: string) {
     let apiGet = `${API.urlAPI}/blog/get`
-    let params = {id}
+    let params = { id }
+    if (token) {
+      return this.http.get(apiGet, { headers: { 'Authorization': token }, params })
+    }
     return this.http.get(apiGet,{params})
   }
   // FormData for Params
-  postCreateBlog(data: FormData, token: string){
+  postCreateBlog(data: FormData, token: string) {
     let apiGet = `${API.urlAPI}/blog/Create`
-    return this.http.post(apiGet,data,{headers:{'Authorization':token}})
+    return this.http.post(apiGet, data, { headers: { 'Authorization': token } })
   }
   //FormData
-  postDeleteBlog(data: FormData, token: string){ 
+  postDeleteBlog(data: FormData, token: string) {
     let apiGet = `${API.urlAPI}/blog/Remove`
-    return this.http.post(apiGet,data)
+    return this.http.post(apiGet, data)
   }
 
-  postEditBlog(data: FormData) {
+  //data Blog
+  postEditBlog(data: FormData, token: string) {
     let apiGet = `${API.urlAPI}/blog/Edit`
-    return this.http.post(apiGet,data)
+    return this.http.post(apiGet, data, { headers: { 'Authorization': token } })
   }
 
 }

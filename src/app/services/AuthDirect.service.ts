@@ -11,7 +11,8 @@ export class AuthDirectService implements CanActivate {
 
   constructor(private _router: Router, private _User: UserService) {
     this._User.subEventRejectUser.subscribe(value => {
-        console.log('Start Event Direct')
+        //console.log('Start Event Direct')
+        this._router.navigate(['/home'])
     })
   }
 

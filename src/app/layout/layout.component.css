@@ -7,13 +7,12 @@
 .leftmain{
   padding: 50px;
 }
-.title-main {
-  font-family: Stactify;
-}
+
 .title-main-sub{
   font-family: initial;
   letter-spacing: 6px;
 }
+
 .ul-main {
   padding: 0;
   font-family: cursive;
@@ -31,35 +30,8 @@
   bottom: 50px;
   left: 0;
 }
-.img-center{
-  width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    border: 20px solid #e6e6e6;
-}
-.div-intro{
-  text-align: center;
-  word-break: break-all;
-  padding: 0 150px;
-  margin-top: 70px;
-}
-.div-intro > p {
-  color: #92948e;
-  font-family: cursive;
-}
-.right-bar-first{
-  height: 100vh;
-  background: linear-gradient( rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.91) ),url('../../assets/images/nature.jpg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-}
-.bar-first-first{
-  margin-top: 100px;
-}
-.div-intro > h2 {
-  color: white;
-}
+
+
 
 .footer-right {
   word-break: break-word;

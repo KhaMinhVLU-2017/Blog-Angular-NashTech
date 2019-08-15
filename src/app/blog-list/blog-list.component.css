@@ -30,3 +30,43 @@
   transform: scale(1);
 }
 
+.right-bar-first{
+  height: 100vh;
+  background: linear-gradient( rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.91) ),url('../../assets/images/nature.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.bar-first-first{
+ margin-top: 100px;
+}
+.title-main {
+  font-family: Stactify;
+}
+
+.img-center{
+  width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 20px solid #e6e6e6;
+}
+.div-intro{
+  text-align: center;
+  word-break: break-all;
+  padding: 0 150px;
+  margin-top: 70px;
+}
+.div-intro > p {
+  color: #92948e;
+  font-family: cursive;
+}
+
+.div-intro > h2 {
+  color: white;
+}
+
+.spanAuthor {
+  font-weight: bold;
+  float: right;
+  font-family: Stactify;
+}

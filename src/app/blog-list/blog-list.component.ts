@@ -8,7 +8,7 @@ import * as API from '../services/config'
   templateUrl: './blog-list.component.html',
   styleUrls: ['./blog-list.component.css'],
   host: {
-    class: 'col-md-12 col-sm-12 col-lg-12'
+    class: 'row'
   }
 })
 

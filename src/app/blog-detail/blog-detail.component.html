@@ -1,4 +1,8 @@
 <div *ngIf='Blog' class="col-md-12 col-sm-12 col-lg-12">
+  <div *ngIf='Blog.edit && _User.currentUser.fullname' class="form-group text-right firstDiv">
+    <a [routerLink]="[ '/home/edit', Blog.blogID ]" class="btn btn-warning">Edit <i class="material-icons md-24"> edit </i>
+    </a>
+  </div>
   <h1 class="detail-title">{{Blog.title | firstUpper}}</h1>
   <p class="detail-sub-title">{{Blog.authorName}} <span>-</span> {{Blog.crDate | date}}</p>
   <img class="detail-img" [src]='Blog.picture' />

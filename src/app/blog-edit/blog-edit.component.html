@@ -1,0 +1,60 @@
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-lg-12 text-center">
+      <h1>Edit Post</h1>
+    </div>
+    <div class="col-md-6 col-sm-6 col-lg-6">
+      <div class="form-group">
+        <label for="Title">Title</label>
+        <input type="text" name='title' #titlev (keyup)='handlChange(titlev)' class="form-control" id="Title"
+         [value]="title"  placeholder="Da Lat The city many dreams" />
+      </div>
+      <div class="form-group">
+        <label for="Sapo">Sapo</label>
+        <textarea type="text" name='sapo' #sapov (keyup)='handlChange(sapov)' class="form-control" id="Sapo"
+          [value]='sapo' placeholder="Description"></textarea>
+      </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-lg-6">
+      <div class="form-group">
+        <label for="file">Image Upload</label>
+        <input type="file" accept="image/*" (change)='handChangeIMG($event)' class="form-control-file" id="file">
+      </div>
+      <div class="form-group">
+        <img *ngIf='images' [src]="images" class="img-thumbnail" alt="Blog Image" />
+      </div>
+    </div>
+    <div class="col-md-12 col-sm-12 col-lg-12">
+      <div class="form-group">
+        <label for="Content">Content</label>
+        <angular-editor [config]='config' [placeholder]="'Enter text here...'" [(ngModel)]="htmlContent"></angular-editor>
+      </div>
+      <p class="alert alert-danger" *ngIf='errorMessage'>{{errorMessage}}</p>
+    </div>
+    <div class="col-md-6 col-md-6 col-lg-6 m-50">
+      <button class="btn btn-danger" data-toggle="modal" data-target="#modelRemove">Delete Blog</button>
+      <div class="modal fade" id="modelRemove" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"> Notification !</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                Are you remove post <strong><em>"{{title}}"</em></strong> ?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" (click)='handlDelete()' data-dismiss="modal" class="btn btn-success">Ok</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-md-6 col-lg-6 divSave m-50">
+      <button (click)='goBack()' class="btn btn-danger">Cancel</button>
+      {{' '}}
+      <button class="btn btn-success" (click)='submitServer()'>Save</button>
+    </div>
+  </div>

@@ -21,6 +21,7 @@ import { FormsModule } from '@angular/forms'
 import {SplitTitle} from './pipe/splitTitle.pipe'
 import {AuthGuardService} from './services/AuthGuardService.service'
 import {AuthDirectService} from './services/AuthDirect.service'
+import {ErrorComponent} from './error/error.component'
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -29,7 +30,8 @@ const routes: Routes = [
     children:[
       { path: '', component: BlogList},
       { path: 'blog/:id', component: BlogDetail},
-      { path: 'create', component: BlogCreate, canActivate: [AuthGuardService,AuthDirectService]}
+      { path: 'create', component: BlogCreate, canActivate: [AuthGuardService,AuthDirectService]},
+      { path: 'edit/:id',component: BlogEdit, canActivate: [AuthGuardService,AuthDirectService]}
     ]
   },
   { path: 'account', redirectTo: '/account/login', pathMatch: 'full' },
@@ -39,16 +41,17 @@ const routes: Routes = [
       {path: 'login', component:AccountLogin},
       {path: 'register', component: AccountRegister}
     ]
-  }
+  },
+  {path: '**',component: ErrorComponent}
 ];
-
 
 @NgModule({
   declarations: [
     AppComponent,LayoutComponent,BlogCreate,
     BlogDetail,BlogEdit,BlogList,AccountLayout,AccountLogin,AccountRegister,
     FirstUpper,
-    SplitTitle
+    SplitTitle,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
