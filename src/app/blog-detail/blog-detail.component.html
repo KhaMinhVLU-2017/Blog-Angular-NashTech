@@ -24,8 +24,8 @@
   <div class="col-md-8 col-sm-8 col-lg-8 offset-md-2 offset-sm-2 offset-lg-2 detail-commented">
     <div *ngFor='let item of Blog.listComment'>
       <div [ngSwitch]="item.authorComment">
-        <p *ngSwitchCase="_User.currentUser.fullname" (click)='handCommentEdit(item)'
-          data-toggle="modal" data-target="#modelComment">
+        <p *ngSwitchCase="_User.currentUser.fullname" (click)='handCommentEdit(item)' data-toggle="modal"
+          data-target="#modelComment">
           <strong>{{item.authorComment}}: </strong>{{item.content}}
         </p>
         <p *ngSwitchDefault>
@@ -47,11 +47,11 @@
         </button>
       </div>
       <div class="modal-body">
-        <input class="form-control" #cmContentV (keyup)='keyUpComment(cmContentV)' [value]='isSelectComment.content' />
+        <input class="form-control" #cmContentV (keyup)='keyUpComment(cmContentV,$event)' [value]='isSelectComment.content' />
       </div>
       <div class="modal-footer">
         <button class="btn btn-danger btnDelete" (click)='deleteComment()' data-dismiss="modal">Delete comment</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button id='btn_closeModal' type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" (click)='handComSave()' class="btn btn-success" data-dismiss="modal">Save</button>
       </div>
     </div>

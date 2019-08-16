@@ -1,71 +1,69 @@
-<div class="row ">
-  <div class="col-md-3 col-lg-3 col-sm-3 text-center leftbar">
-    <div class="col-md-12 col-lg-12 col-sm-12 leftmain">
-      <h2 class="title-main"><strong>JudasFate</strong></h2>
-      <p class="title-main-sub">PERSONAL BLOG</p>
-      <div class="div-main">
-        <ul class="ul-main" type='none'>
-          <li><a routerLink='/home'>Home</a></li>
-          <li class="parent-li-dialog" (click)='toggleBlog()'>Blog<i class="material-icons"> arrow_drop_down </i>
-            <ul [className]="screenBlog ? 'ul-dialog visible' : 'ul-dialog invisible'" type='none'>
-              <li><a routerLink="/home/create" class="btnOut" >CreatePost</a></li>
-            </ul>
-          </li>
-          <li class="parent-li-dialog" (click)='toggle()' *ngIf='_User.currentUser.fullname; else Login'>
-            {{_User.currentUser.fullname}}
-            <i class="material-icons">
-              arrow_drop_down
-            </i>
-            <ul [className]="screen ? 'ul-dialog visible' : 'ul-dialog invisible'" type='none'>
-              <li><button class="btnOut" (click)='logout()'>Logout</button></li>
-            </ul>
-          </li>
-          <ng-template #Login>
-            <li><a routerLink='/account/login'>Login</a></li>
-            <li><a routerLink='/account/register'>Register</a></li>
-          </ng-template>
-          <li>|</li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer">
-      <i class="material-icons">&#xE87C;</i>
-      <i class="material-icons">favorite</i>
+<div class="col-md-3 col-lg-3 col-sm-3 text-center leftbar">
+  <div class="col-md-12 col-lg-12 col-sm-12 leftmain">
+    <h2 class="title-main"><strong>JudasFate</strong></h2>
+    <p class="title-main-sub">PERSONAL BLOG</p>
+    <div class="div-main">
+      <ul class="ul-main" type='none'>
+        <li><a routerLink='/home'>Home</a></li>
+        <li class="parent-li-dialog" (click)='toggleBlog()'>Blog<i class="material-icons"> arrow_drop_down </i>
+          <ul [className]="screenBlog ? 'ul-dialog visible' : 'ul-dialog invisible'" type='none'>
+            <li><a routerLink="/home/create" class="btnOut">CreatePost</a></li>
+          </ul>
+        </li>
+        <li class="parent-li-dialog" (click)='toggle()' *ngIf='_User.currentUser.fullname; else Login'>
+          {{_User.currentUser.fullname}}
+          <i class="material-icons">
+            arrow_drop_down
+          </i>
+          <ul [className]="screen ? 'ul-dialog visible' : 'ul-dialog invisible'" type='none'>
+            <li><button class="btnOut" (click)='logout()'>Logout</button></li>
+          </ul>
+        </li>
+        <ng-template #Login>
+          <li><a routerLink='/account/login'>Login</a></li>
+          <li><a routerLink='/account/register'>Register</a></li>
+        </ng-template>
+        <li>|</li>
+      </ul>
     </div>
   </div>
-  <div class="offset-md-3 offset-lg-3 offset-sm-3 col-md-9 col-lg-9 col-sm-9">
-    <div class="row">
- 
-      <!-- <blog-list class="col-md-12 col-sm-12 col-lg-12"></blog-list>
+  <div class="footer">
+    <i class="material-icons">&#xE87C;</i>
+    <i class="material-icons">favorite</i>
+  </div>
+</div>
+<div class="offset-md-3 offset-lg-3 offset-sm-3 col-md-9 col-lg-9 col-sm-9 overflowHidden">
+  <div class="row">
+
+    <!-- <blog-list class="col-md-12 col-sm-12 col-lg-12"></blog-list>
       <blog-detail class="col-md-12 col-sm-12 col-lg-12"></blog-detail> -->
-      <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
+  </div>
+  <div class="row footer-right">
+    <div class="col-md-6 col-sm-6 col-lg-6">
+      <ul class="footer-right-ul" type='none'>
+        <li>JudasFate, blogger</li>
+        <li>1** Cong Quynh Street, Nguyen Cu Trinh Ward, District 1, HCM</li>
+        <li>0937******</li>
+        <li><a href="#"><span class="text-info">judasfate@gmail.com</span></a></li>
+      </ul>
     </div>
-    <div class="row footer-right">
-      <div class="col-md-6 col-sm-6 col-lg-6">
-        <ul class="footer-right-ul" type='none'>
-          <li>JudasFate, blogger</li>
-          <li>1** Cong Quynh Street, Nguyen Cu Trinh Ward, District 1, HCM</li>
-          <li>0937******</li>
-          <li><a href="#"><span class="text-info">judasfate@gmail.com</span></a></li>
-        </ul>
-      </div>
-      <div class="col-md-6 col-sm-6 col-lg-6">
-        <ul class="footer-right-ul" type='none'>
-          <li>Follow Us:</li>
-          <li>
-            <i class="material-icons m-15"> explore
-            </i>
-            <i class="material-icons m-15">
-              supervisor_account
-            </i>
-          </li>
-        </ul>
-      </div>
+    <div class="col-md-6 col-sm-6 col-lg-6">
+      <ul class="footer-right-ul" type='none'>
+        <li>Follow Us:</li>
+        <li>
+          <i class="material-icons m-15"> explore
+          </i>
+          <i class="material-icons m-15">
+            supervisor_account
+          </i>
+        </li>
+      </ul>
     </div>
-    <div class="row footer-last">
-      <div class="col-md-12 col-sm-12 col-lg-12">
-        <p><em>Create by JudasFate</em></p>
-      </div>
+  </div>
+  <div class="row footer-last">
+    <div class="col-md-12 col-sm-12 col-lg-12">
+      <p><em>Create by JudasFate</em></p>
     </div>
   </div>
 </div>

@@ -6,7 +6,10 @@ import {UserService} from '../services/user.service'
 @Component({
   selector: 'layout',
   templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.css']
+  styleUrls: ['./layout.component.css'],
+  host: {
+    class: 'row'
+  }
 })
 
 export class LayoutComponent implements OnInit {

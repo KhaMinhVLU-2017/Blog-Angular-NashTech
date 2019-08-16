@@ -1,4 +1,4 @@
-import { Component, OnInit, Injectable } from '@angular/core'
+import { Component, OnInit, Injectable, AfterViewInit } from '@angular/core'
 import { BlogServices } from '../services/blog.service'
 import * as API from '../services/config'
 
@@ -12,16 +12,19 @@ import * as API from '../services/config'
   }
 })
 
-export class BlogList implements OnInit {
+export class BlogList implements OnInit,AfterViewInit {
+
   ListBlog: []
   urlServer: string
 
   constructor(private httpBlog: BlogServices) { }
 
   ngOnInit(): void {
+
+  }
+
+  ngAfterViewInit(): void {
     this.urlServer = API.urlServer
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
     this.httpBlog.getList()
       .subscribe(res => {
         let blogHanlder = res['listBlog']

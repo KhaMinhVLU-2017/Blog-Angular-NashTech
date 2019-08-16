@@ -103,3 +103,7 @@
   color: white;
   font-weight: bold;
 }
+
+.overflowHidden{
+  overflow: hidden;
+}

@@ -4,6 +4,7 @@ import { BlogServices } from '../services/blog.service'
 import { UserService } from '../services/user.service'
 import { CommentService } from '../services/comment.service'
 import * as API from '../services/config'
+import { $ } from 'protractor';
 
 @Component({
   selector: 'blog-detail',
@@ -108,19 +109,19 @@ export class BlogDetail implements OnInit {
     this._Comment.postEditComment(comment, token)
       .subscribe(res => {
         let status = res['status']
-        if(status===200) {
+        if (status === 200) {
           let listCommentNew = this.Blog.listComment
           listCommentNew.map(item => {
-            if(item['commentID'] === this.isSelectComment['commentID']) {
+            if (item['commentID'] === this.isSelectComment['commentID']) {
               item['content'] = this.isSelectComment['content']
               return item
             }
             return item
           })
           this.Blog.listComment = listCommentNew
-        }else if(status===403){
+        } else if (status === 403) {
           this._User.changeMessageError('Forbidden')
-        }else {
+        } else {
           this._User.subEventRejectUser.next(true)
         }
       }, err => {
@@ -128,30 +129,36 @@ export class BlogDetail implements OnInit {
       })
   }
 
-  deleteComment(){
+  deleteComment() {
     let data = new FormData()
-    data.set('commentID',this.isSelectComment['commentID'])
+    data.set('commentID', this.isSelectComment['commentID'])
     let token = this._User.currentUser['token']
-    this._Comment.postDeleteComment(data,token)
-    .subscribe(res=> {
-      let status = res['status']
-      if (status === 200) {
-        let newListComment = this.Blog.listComment
-        let commentID = this.isSelectComment['commentID']
-        newListComment = newListComment.filter(item => item['commentID']!==commentID)
-        this.Blog.listComment = newListComment
-      } else if (status === 403) {
-        this._User.subEventRejectUser.next(true)
-      } else {
-        this._User.subEventRejectUser.next(true)
-      }
-    },err => {
-      console.log(err)
-    })
+    this._Comment.postDeleteComment(data, token)
+      .subscribe(res => {
+        let status = res['status']
+        if (status === 200) {
+          let newListComment = this.Blog.listComment
+          let commentID = this.isSelectComment['commentID']
+          newListComment = newListComment.filter(item => item['commentID'] !== commentID)
+          this.Blog.listComment = newListComment
+        } else if (status === 403) {
+          this._User.subEventRejectUser.next(true)
+        } else {
+          this._User.subEventRejectUser.next(true)
+        }
+      }, err => {
+        console.log(err)
+      })
   }
 
-  keyUpComment(e) {
+  keyUpComment(e, event) {
     let { value } = e
     this.isSelectComment['content'] = value
+    if (event.keyCode === 13) {
+      this.handComSave()
+      let btn_closeModal = document.getElementById('btn_closeModal')
+      btn_closeModal.click()
+    }
+
   }
 }
