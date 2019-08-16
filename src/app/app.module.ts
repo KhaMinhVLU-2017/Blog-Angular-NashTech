@@ -23,6 +23,7 @@ import {AuthGuardService} from './services/AuthGuardService.service'
 import {AuthDirectService} from './services/AuthDirect.service'
 import {ErrorComponent} from './error/error.component'
 import {CommentService} from './services/comment.service'
+import {SignalRService} from './services/SignalRService.service'
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -76,7 +77,7 @@ const routes: Routes = [
     FormsModule,
     AngularEditorModule
   ],
-  providers: [BlogServices,UserService,AuthGuardService,AuthDirectService,CommentService],
+  providers: [BlogServices,UserService,AuthGuardService,AuthDirectService,CommentService,SignalRService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

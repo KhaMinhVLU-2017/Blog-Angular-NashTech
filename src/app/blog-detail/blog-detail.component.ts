@@ -4,7 +4,7 @@ import { BlogServices } from '../services/blog.service'
 import { UserService } from '../services/user.service'
 import { CommentService } from '../services/comment.service'
 import * as API from '../services/config'
-import { $ } from 'protractor';
+import { SignalRService } from '../services/SignalRService.service'
 
 @Component({
   selector: 'blog-detail',
@@ -16,6 +16,7 @@ import { $ } from 'protractor';
 })
 @Injectable()
 export class BlogDetail implements OnInit {
+  isChoose: boolean = false
   paramID: string
   Blog: {
     listComment: Array<object>
@@ -30,12 +31,9 @@ export class BlogDetail implements OnInit {
   }
 
   constructor(private _Router: Router, private activeRoute: ActivatedRoute, private blogSer: BlogServices, private _User: UserService,
-    private _Comment: CommentService) {
-
-  }
+    private _Comment: CommentService, private _signalR: SignalRService) { }
 
   ngOnInit(): void {
-
     this.activeRoute.paramMap
       .subscribe(params => {
         this.paramID = params.get('id')
@@ -63,6 +61,46 @@ export class BlogDetail implements OnInit {
       }, err => {
         console.log(err)
       })
+    this._signalR.commentListener()// Listener realtime
+
+    // Get Comment realtime
+    this._signalR.addCommentObser
+      .subscribe(comment => {
+        if (!this.isChoose) {
+          let listComment = this.Blog.listComment
+          listComment.unshift(comment)
+          this.Blog.listComment = listComment
+        }
+        this.isChoose = false
+      })
+    // Edit Comment realtime
+    this._signalR.addCommentEditObser
+      .subscribe(commentEdit => {
+        if (!this.isChoose) {
+          let commentID = commentEdit['commentID']
+          let listComment = this.Blog.listComment
+          listComment.map(item => {
+            if (item['commentID'] == commentID) {
+              item['content'] = commentEdit['content']
+              return item
+            }
+            return item
+          })
+          this.Blog.listComment = listComment
+        }
+        this.isChoose = false
+      })
+
+    //Delete comment realtime
+    this._signalR.addCommentDeleteObser
+      .subscribe(commentID => {
+        if (!this.isChoose) {
+          let listComment = this.Blog.listComment
+          listComment = listComment.filter(item => item['commentID'] != commentID)
+          this.Blog.listComment = listComment
+        }
+        this.isChoose = false
+      })
   }
 
   handlChangeKey(e, event) {
@@ -83,8 +121,10 @@ export class BlogDetail implements OnInit {
       .subscribe(res => {
         let status = res['status']
         if (status === 200) {
+          this.isChoose = true
           let comment = res['comment']
           this.Blog.listComment.unshift(comment)
+          this._signalR.sendComment(comment)
           this.comment = null
           // Todo Logic
         } else if (status === 403) {
@@ -101,6 +141,7 @@ export class BlogDetail implements OnInit {
     this.isSelectComment = comment
   }
 
+  //Edit comment
   handComSave() {
     let comment = new FormData()
     comment.set('Content', this.isSelectComment['content'])
@@ -110,6 +151,7 @@ export class BlogDetail implements OnInit {
       .subscribe(res => {
         let status = res['status']
         if (status === 200) {
+          this.isChoose = true
           let listCommentNew = this.Blog.listComment
           listCommentNew.map(item => {
             if (item['commentID'] === this.isSelectComment['commentID']) {
@@ -118,6 +160,7 @@ export class BlogDetail implements OnInit {
             }
             return item
           })
+          this._signalR.sendEditComment(this.isSelectComment) //send realtime
           this.Blog.listComment = listCommentNew
         } else if (status === 403) {
           this._User.changeMessageError('Forbidden')
@@ -137,10 +180,12 @@ export class BlogDetail implements OnInit {
       .subscribe(res => {
         let status = res['status']
         if (status === 200) {
+          this.isChoose = true
           let newListComment = this.Blog.listComment
           let commentID = this.isSelectComment['commentID']
           newListComment = newListComment.filter(item => item['commentID'] !== commentID)
           this.Blog.listComment = newListComment
+          this._signalR.sendDeleteComment(commentID)
         } else if (status === 403) {
           this._User.subEventRejectUser.next(true)
         } else {
