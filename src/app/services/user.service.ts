@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { Router } from '@angular/router'
 import * as API from '../services/config'
-import { Subject } from 'rxjs';
+import { Subject } from 'rxjs'
+import {SignalRService} from './SignalRService.service'
 
 @Injectable({
   providedIn: 'root'
@@ -19,13 +20,15 @@ export class UserService {
 
   addErrorMess: Subject <any> = new Subject<any>()
 
-  constructor(private http: HttpClient, private _Router: Router) {
+  constructor(private http: HttpClient, private _Router: Router, private _Signal : SignalRService) {
     this.addErrorMess.subscribe(mess => {
       this.errorMessage = mess
     })
 
     this.subEventRejectUser.subscribe(value => {
       if (value) {
+        this._Signal.addRejectOfflineUser.next(this.currentUser['fullname'])
+
         localStorage.clear()
         this.currentUser = {}
         //let url = this._Router.url // url current
