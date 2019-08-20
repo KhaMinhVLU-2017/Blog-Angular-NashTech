@@ -19,6 +19,7 @@
             <li><button class="btnOut" (click)='logout()'>Logout</button></li>
           </ul>
         </li>
+        <li *ngIf='_User.currentUser.fullname'><a routerLink='/home/game'>Game</a></li>
         <ng-template #Login>
           <li><a routerLink='/account/login'>Login</a></li>
           <li><a routerLink='/account/register'>Register</a></li>
@@ -35,7 +36,7 @@
 <div class="offset-md-3 offset-lg-3 offset-sm-3 col-md-9 col-lg-9 col-sm-9 overflowHidden">
   <div class="row">
     <!-- <blog-list class="col-md-12 col-sm-12 col-lg-12"></blog-list>
-      <blog-detail class="col-md-12 col-sm-12 col-lg-12"></blog-detail> -->
+    <blog-detail class="col-md-12 col-sm-12 col-lg-12"></blog-detail> -->
     <router-outlet></router-outlet>
   </div>
   <div class="row footer-right">

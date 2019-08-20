@@ -1,0 +1,21 @@
+<div (click)='eventClick($event)' class="main col-md-12 col-lg-12 col-sm-12 text-center">
+  <h1>Run Game</h1>
+  <div class="col-md-2">
+    <p><strong>Online User</strong></p>
+    <table class="table-online">
+      <tr>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr *ngFor='let item of _Signal.listUserOnline'>
+        <td>{{item.fullname}}</td>
+        <td><i class="material-icons online">
+            face
+          </i></td>
+      </tr>
+    </table>
+  </div>
+  <div class="main-bg col-md-8 col-lg-8 col-sm-8" id='wdgame' (keypress)='controlEvent($event)'>
+    <img src="../../assets/images/icar.png" [ngStyle]="icar" />
+  </div>
+</div>
