@@ -24,6 +24,7 @@ import {AuthDirectService} from './services/AuthDirect.service'
 import {ErrorComponent} from './error/error.component'
 import {CommentService} from './services/comment.service'
 import {SignalRService} from './services/SignalRService.service'
+import {TankComponent} from './gameTank/gametank.component'
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -33,9 +34,11 @@ const routes: Routes = [
       { path: '', component: BlogList},
       { path: 'blog/:id', component: BlogDetail},
       { path: 'create', component: BlogCreate, canActivate: [AuthGuardService,AuthDirectService]},
-      { path: 'edit/:id',component: BlogEdit, canActivate: [AuthGuardService,AuthDirectService]}
+      { path: 'edit/:id',component: BlogEdit, canActivate: [AuthGuardService,AuthDirectService]},
+      { path: 'game', component: TankComponent}
     ]
   },
+
   { path: 'account', redirectTo: '/account/login', pathMatch: 'full' },
   {
     path: 'account', component: AccountLayout,
@@ -53,7 +56,8 @@ const routes: Routes = [
     BlogDetail,BlogEdit,BlogList,AccountLayout,AccountLogin,AccountRegister,
     FirstUpper,
     SplitTitle,
-    ErrorComponent
+    ErrorComponent,
+    TankComponent
   ],
   imports: [
     BrowserModule,
