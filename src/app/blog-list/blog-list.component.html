@@ -15,24 +15,52 @@
 </div>
 <div class="col-md-12 central">
   <h2 class="title-central">List Blog</h2>
-  <p class="text-right">
-    <a routerLink="/home/create" class="text-decoration-none btn btn-outline-secondary">
-      Post Blog
-      <i class="material-icons md-18">
-        create
-      </i>
-    </a>
-  </p>
-  <div class="row rowCard">
-    <div *ngFor="let item of ListBlog" class="card mycard">
-      <img class="card-img-top mycard-img" [src]="item.picture" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">{{item.title | splitTitle: 20}}</h5>
-        <p class="card-text">{{item.sapo}}</p>
-        <br *ngIf='item.sapo.length < 50' />
-        <a [routerLink]="[ 'blog', item.blogID ]" class="btn btn-outline-secondary">Go more</a>
-        <span class="spanAuthor">{{item.authorName}}</span>
+  <div class="text-right row">
+    <div class="input-group offset-md-6 col-md-6">
+      <input type="text" [value]='httpBlog.keysearch' name='keysearch' #keySearch (keyup)='changeSearch(keySearch,$event)' class="form-control"
+        placeholder="Search">
+      <div class="input-group-prepend m-r-20">
+        <div class="input-group-text"><i class="material-icons md-24"> search </i></div>
       </div>
+      {{' '}}
+      <a routerLink="/home/create" class="text-decoration-none btn btn-outline-secondary">
+        Post Blog
+        <i class="material-icons md-18">
+          create
+        </i>
+      </a>
     </div>
+  </div>
+  <div class="row rowCard">
+    <ng-container *ngIf="httpBlog.listSearch.length;else contentMain">
+      <ng-template #HaveMess>
+        <div class="row col-md-12 col-sm-12 col-lg-12">
+          <p class="text text-info"><strong>List Search</strong></p>
+        </div>
+      </ng-template>
+      <p *ngIf='errorMess; else HaveMess' class="alert alert-danger">Not Found Blog</p>
+      <div *ngFor="let item of httpBlog.listSearch" class="card mycard">
+        <img class="card-img-top mycard-img" [src]="item.picture" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{item.title | splitTitle: 20}}</h5>
+          <p class="card-text">{{item.sapo}}</p>
+          <br *ngIf='item.sapo.length < 50' />
+          <a [routerLink]="[ 'blog', item.blogID ]" class="btn btn-outline-secondary">Go more</a>
+          <span class="spanAuthor">{{item.authorName}}</span>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #contentMain>
+      <div *ngFor="let item of ListBlog" class="card mycard">
+        <img class="card-img-top mycard-img" [src]="item.picture" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{item.title | splitTitle: 20}}</h5>
+          <p class="card-text">{{item.sapo}}</p>
+          <br *ngIf='item.sapo.length < 50' />
+          <a [routerLink]="[ 'blog', item.blogID ]" class="btn btn-outline-secondary">Go more</a>
+          <span class="spanAuthor">{{item.authorName}}</span>
+        </div>
+      </div>
+    </ng-template>
   </div>
 </div>

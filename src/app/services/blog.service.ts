@@ -8,7 +8,11 @@ import { Observable } from 'rxjs'
 })
 export class BlogServices {
 
+  listSearch: Array<any> = []
+  keysearch: string = ''
+
   constructor(private http: HttpClient) {
+
   }
 
   getList() {
@@ -48,6 +52,12 @@ export class BlogServices {
   postEditBlog(data: FormData, token: string) {
     let apiGet = `${API.urlAPI}/blog/Edit`
     return this.http.post(apiGet, data, { headers: { 'Authorization': token } })
+  }
+
+  //Search
+  postSearchBlog(data: FormData) {
+    let apiGet = `${API.urlAPI}/blog/Search`
+    return this.http.post(apiGet, data)
   }
 
 }
