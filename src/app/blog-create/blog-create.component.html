@@ -26,7 +26,7 @@
   <div class="col-md-12 col-sm-12 col-lg-12">
     <div class="form-group">
       <label for="Content">Content</label>
-      <angular-editor [config]='config' [placeholder]="'Enter text here...'" [(ngModel)]="htmlContent"></angular-editor>
+      <angular-editor [config]='config' [placeholder]="'Enter text here...'" [(ngModel)]='htmlContent'></angular-editor>
     </div>
     <p class="alert alert-danger" *ngIf='errorMessage'>{{errorMessage}}</p>
   </div>

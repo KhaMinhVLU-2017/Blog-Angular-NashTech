@@ -1,4 +1,4 @@
-import { Component, Injectable } from '@angular/core'
+import { Component, Injectable, OnInit } from '@angular/core'
 import { AngularEditorConfig } from '@kolkov/angular-editor'
 import * as API from '../services/config'
 import { BlogServices } from '../services/blog.service'
@@ -16,18 +16,23 @@ import { Location } from '@angular/common';
   }
 })
 
-export class BlogCreate {
+export class BlogCreate implements OnInit{
   images: any
-  htmlContent: string
+  htmlContent: string 
   title: string
   sapo: string
   file: File
   errorMessage: string
-  constructor(private _Blog: BlogServices, private _User: UserService, private _Router: Router, private _Location: Location) {
-  
-  }
+  constructor(private _Blog: BlogServices,
+     private _User: UserService,
+      private _Router: Router,
+       private _Location: Location) {}
   goBack() {
     this._Location.back()
+  }
+
+  ngOnInit(): void {
+
   }
 
   handlChange(e) {
@@ -73,6 +78,7 @@ export class BlogCreate {
       })
   }
 
+
   config: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -99,6 +105,8 @@ export class BlogCreate {
       },
     ],
     uploadUrl: `${API.urlAPI}/blog/SaveIMG`, // Todo Add Link Server
+    sanitize: true,
+      
   }
 
 

@@ -26,6 +26,7 @@ import {CommentService} from './services/comment.service'
 import {SignalRService} from './services/SignalRService.service'
 import {TankComponent} from './gameTank/gametank.component'
 import {GameComponent} from './game/game.component'
+import {SafePipe} from './pipe/safe.pipe'
 
 
 const routes: Routes = [
@@ -59,6 +60,7 @@ const routes: Routes = [
     BlogDetail,BlogEdit,BlogList,AccountLayout,AccountLogin,AccountRegister,
     FirstUpper,
     SplitTitle,
+    SafePipe,
     ErrorComponent,
     TankComponent,
     GameComponent
