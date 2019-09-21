@@ -133,7 +133,7 @@ export class BlogEdit implements OnInit {
   config: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
-    height: '200px',
+    height: '500px',
     placeholder: 'Enter text here...',
     enableToolbar: true,
     showToolbar: true,

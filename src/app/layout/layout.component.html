@@ -19,7 +19,7 @@
             <li><button class="btnOut" (click)='logout()'>Logout</button></li>
           </ul>
         </li>
-        <li *ngIf='_User.currentUser.fullname'><a routerLink='/home/game'>Game</a></li>
+        <!-- <li *ngIf='_User.currentUser.fullname'><a routerLink='/home/game'>Game</a></li> -->
         <ng-template #Login>
           <li><a routerLink='/account/login'>Login</a></li>
           <li><a routerLink='/account/register'>Register</a></li>
@@ -39,32 +39,34 @@
     <blog-detail class="col-md-12 col-sm-12 col-lg-12"></blog-detail> -->
     <router-outlet></router-outlet>
   </div>
-  <div class="row footer-right">
-    <div class="col-md-6 col-sm-6 col-lg-6">
-      <ul class="footer-right-ul" type='none'>
-        <li>JudasFate, blogger</li>
-        <li><i class="material-icons">email</i>{{' '}}
-          <a href="#"><span class="text-info">judasfate@gmail.com</span></a>
-        </li>
-      </ul>
-    </div>
-    <div class="col-md-6 col-sm-6 col-lg-6">
-      <ul class="footer-right-ul" type='none'>
-        <li>Follow Us:</li>
-        <li>
-          <i class="material-icons m-15"> explore
-          </i>
-          <a href="https://github.com/KhaMinhVLU-2017">
-            <i class="material-icons m-15">supervisor_account
+  <div class="row container-footer">
+    <div class="row w-100 footer-right ">
+      <div class="col-md-6 col-sm-6 col-lg-6">
+        <ul class="footer-right-ul" type='none'>
+          <li>JudasFate, blogger</li>
+          <li><i class="material-icons">email</i>{{' '}}
+            <a href="#"><span class="text-info">judasfate@gmail.com</span></a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-6 col-sm-6 col-lg-6">
+        <ul class="footer-right-ul" type='none'>
+          <li>Follow Us:</li>
+          <li>
+            <i class="material-icons m-15"> explore
             </i>
-          </a>
-        </li>
-      </ul>
+            <a href="https://github.com/KhaMinhVLU-2017">
+              <i class="material-icons m-15">supervisor_account
+              </i>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
-  <div class="row footer-last">
-    <div class="col-md-12 col-sm-12 col-lg-12">
-      <p><em>Create by JudasFate</em></p>
+    <div class="row w-100 footer-last">
+      <div class="col-md-12 col-sm-12 col-lg-12">
+        <p><em>Create by JudasFate</em></p>
+      </div>
     </div>
   </div>
 </div>

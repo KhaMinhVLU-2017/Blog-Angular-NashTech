@@ -17,8 +17,8 @@
   <h2 class="title-central">List Blog</h2>
   <div class="text-right row">
     <div class="input-group offset-md-6 col-md-6">
-      <input type="text" [value]='httpBlog.keysearch' name='keysearch' #keySearch (keyup)='changeSearch(keySearch,$event)' class="form-control"
-        placeholder="Search">
+      <input type="text" [value]='httpBlog.keysearch' name='keysearch' #keySearch
+        (keyup)='changeSearch(keySearch,$event)' class="form-control" placeholder="Search">
       <div class="input-group-prepend m-r-20">
         <div class="input-group-text"><i class="material-icons md-24"> search </i></div>
       </div>
@@ -38,7 +38,11 @@
           <p class="text text-info"><strong>List Search</strong></p>
         </div>
       </ng-template>
-      <p *ngIf='errorMess; else HaveMess' class="alert alert-danger">Not Found Blog</p>
+      <ng-container *ngIf='errorMess; else HaveMess'>
+        <div class="row col-md-12 col-sm-12 col-lg-12">
+          <p class="alert alert-danger">Not Found Blog</p>
+        </div>
+      </ng-container>
       <div *ngFor="let item of httpBlog.listSearch" class="card mycard">
         <img class="card-img-top mycard-img" [src]="item.picture" alt="Card image cap">
         <div class="card-body">

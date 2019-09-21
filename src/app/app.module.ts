@@ -27,6 +27,7 @@ import {SignalRService} from './services/SignalRService.service'
 import {TankComponent} from './gameTank/gametank.component'
 import {GameComponent} from './game/game.component'
 import {SafePipe} from './pipe/safe.pipe'
+import {LayoutAdmin} from './Admin/Layout/layout.component'
 
 
 const routes: Routes = [
@@ -42,7 +43,7 @@ const routes: Routes = [
       { path: 'game', component: GameComponent}
     ]
   },
-
+  {path: 'admin', component: LayoutAdmin},
   { path: 'account', redirectTo: '/account/login', pathMatch: 'full' },
   {
     path: 'account', component: AccountLayout,
@@ -63,7 +64,8 @@ const routes: Routes = [
     SafePipe,
     ErrorComponent,
     TankComponent,
-    GameComponent
+    GameComponent,
+    LayoutAdmin
   ],
   imports: [
     BrowserModule,

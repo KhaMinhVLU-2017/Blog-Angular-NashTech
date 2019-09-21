@@ -66,9 +66,8 @@ export class BlogList implements OnInit, AfterViewInit {
         let status = res['status']
         if (status === 200) {
           let listBlog = res['listBlog']
-          if (listBlog.length < 0) {
-            this.errorMess = true
-          } else {
+
+          if (listBlog.length > 0) {
             listBlog.map(item => {
               item.picture = `${this.linkServerIMG}/${item.picture}`
               let count = item.sapo.length
@@ -79,9 +78,14 @@ export class BlogList implements OnInit, AfterViewInit {
               }
               item.sapo = item.sapo
               return item
-            })     
+            })
+            this.errorMess = false;
             this.httpBlog.listSearch = [...listBlog]
+          } else {
+            this.errorMess = true
+            this.httpBlog.listSearch = []
           }
+          console.log(this.errorMess)
         } else if (status === 403) {
           this._User.subEventRejectUser.next(true)
         } else {
@@ -98,10 +102,10 @@ export class BlogList implements OnInit, AfterViewInit {
     // if (event.keyCode === 13) {
     //   this.submitSearch()
     // }
-    if(event.keyCode === 46) {
+    if (event.keyCode === 46) {
       this.submitSearch()
     }
-    if(value.length < 1) {
+    if (value.length < 1) {
       this.httpBlog.listSearch = []
     }
     this.submitSearch()
