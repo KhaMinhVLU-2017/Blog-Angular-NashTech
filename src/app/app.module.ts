@@ -28,7 +28,7 @@ import {TankComponent} from './gameTank/gametank.component'
 import {GameComponent} from './game/game.component'
 import {SafePipe} from './pipe/safe.pipe'
 import {LayoutAdmin} from './Admin/Layout/layout.component'
-
+import {BlogListAdmin} from './Admin/blog-list/blog-listAdmin.component'
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -43,7 +43,11 @@ const routes: Routes = [
       { path: 'game', component: GameComponent}
     ]
   },
-  {path: 'admin', component: LayoutAdmin},
+  {path: 'admin', component: LayoutAdmin,
+    children:[
+      {path: 'blog', component: BlogListAdmin}
+    ]
+  },
   { path: 'account', redirectTo: '/account/login', pathMatch: 'full' },
   {
     path: 'account', component: AccountLayout,
@@ -65,7 +69,8 @@ const routes: Routes = [
     ErrorComponent,
     TankComponent,
     GameComponent,
-    LayoutAdmin
+    LayoutAdmin,
+    BlogListAdmin
   ],
   imports: [
     BrowserModule,
