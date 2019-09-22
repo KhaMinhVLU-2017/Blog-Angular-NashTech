@@ -24,7 +24,6 @@ export class BlogListAdmin implements OnInit, AfterViewInit {
             response => {
                 let status = response['status']
                 let listBlog = response['listBlog']
-                let message = response['message']
                 if (listBlog.length > 0 && status === 200) {
                     listBlog.map(item => {
                         if (item.picture !== null) {
