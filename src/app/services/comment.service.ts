@@ -25,4 +25,8 @@ export class CommentService{
     return this._http.post(url,data,{headers: {'Authorization': token }})
   }
 
+  getListComment(token: string){
+    let url= `${API.urlAPI}/admin/comments`
+    return this._http.get(url, { headers: { 'Authorization': token } })
+  }
 }

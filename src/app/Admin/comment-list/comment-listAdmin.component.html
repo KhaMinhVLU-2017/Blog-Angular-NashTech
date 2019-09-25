@@ -1,0 +1,31 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink='/admin/comment'>Comment</a></li>
+    </ol>
+</nav>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Author</th>
+            <th scope="col">Content</th>
+            <th scope="col">Blog</th>
+            <th scope="col">DateTime</th>
+            <th scope="col">Modifi</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let comment of ListComment; let i = index">
+            <th scope="row">{{i + 1}}</th>
+            <td>{{comment.Authorcomment}}</td>
+            <td>{{comment.content  | splitTitle: 50}}</td>
+            <td>{{comment.titleBlog}}</td>
+            <td>{{comment.crDate}}</td>
+            <td>
+                <button class="btn btn-warning"><i class="material-icons">edit</i></button>
+                {{' '}}
+                <button class="btn btn-danger"><i class="material-icons">remove_circle_outline</i></button>
+            </td>
+        </tr>
+    </tbody>
+</table>

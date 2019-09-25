@@ -29,6 +29,7 @@ import {GameComponent} from './game/game.component'
 import {SafePipe} from './pipe/safe.pipe'
 import {LayoutAdmin} from './Admin/Layout/layout.component'
 import {BlogListAdmin} from './Admin/blog-list/blog-listAdmin.component'
+import {CommentListAdmin} from './Admin/comment-list/comment-listAdmin.component'
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -45,7 +46,8 @@ const routes: Routes = [
   },
   {path: 'admin', component: LayoutAdmin,
     children:[
-      {path: 'blog', component: BlogListAdmin}
+      {path: 'blog', component: BlogListAdmin},
+      {path: 'comment', component: CommentListAdmin}
     ]
   },
   { path: 'account', redirectTo: '/account/login', pathMatch: 'full' },
@@ -70,7 +72,8 @@ const routes: Routes = [
     TankComponent,
     GameComponent,
     LayoutAdmin,
-    BlogListAdmin
+    BlogListAdmin,
+    CommentListAdmin
   ],
   imports: [
     BrowserModule,
