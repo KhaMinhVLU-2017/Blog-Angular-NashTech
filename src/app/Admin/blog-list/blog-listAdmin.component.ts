@@ -2,7 +2,7 @@ import { Component, AfterViewInit, OnInit, Injectable } from '@angular/core'
 import { BlogServices } from '../../services/blog.service'
 import { UserService } from '../../services/user.service'
 import * as API from '../../services/config'
-
+import {ConditionalResponse} from '../../Utility/function'
 @Injectable()
 @Component({
     selector: 'blog-list-admin',
@@ -20,11 +20,12 @@ export class BlogListAdmin implements OnInit, AfterViewInit {
         this.linkServerIMG = `${API.urlServer}/assert/images`
     }
     ngAfterViewInit(): void {
-        this._blogService.getList().subscribe(
+        this._blogService.getListBlogAdmin().subscribe(
             response => {
+                console.log(response)
                 let status = response['status']
                 let listBlog = response['listBlog']
-                if (listBlog.length > 0 && status === 200) {
+                if ( status === 200 && listBlog.length > 0 ) {
                     listBlog.map(item => {
                         if (item.picture !== null) {
                             item.picture = `${this.linkServerIMG}/${item.picture}`
@@ -33,11 +34,8 @@ export class BlogListAdmin implements OnInit, AfterViewInit {
                         return item
                     })
                     this.ListBlog = listBlog
-                }else
-                if (status === 403) {
-                    this._userService.Logout()
-                } else {
-                    this._userService.Logout()
+                }else {
+                    ConditionalResponse(status,this._userService)
                 }
             },
             error => { console.log(error) }

@@ -8,24 +8,43 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Author</th>
-            <th scope="col">Content</th>
-            <th scope="col">Blog</th>
+            <th scope="col">Comment</th>
+            <th scope="col">Title Blog</th>
             <th scope="col">DateTime</th>
-            <th scope="col">Modifi</th>
+            <th scope="col">Modify</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let comment of ListComment; let i = index">
             <th scope="row">{{i + 1}}</th>
-            <td>{{comment.Authorcomment}}</td>
+            <td><strong>{{comment.authorComment}}</strong></td>
             <td>{{comment.content  | splitTitle: 50}}</td>
             <td>{{comment.titleBlog}}</td>
             <td>{{comment.crDate}}</td>
             <td>
-                <button class="btn btn-warning"><i class="material-icons">edit</i></button>
+                <button class="btn btn-warning" data-toggle="modal" data-target="#modelComment" (click)='handlerEditComment(comment)'><i class="material-icons">edit</i></button>
                 {{' '}}
                 <button class="btn btn-danger"><i class="material-icons">remove_circle_outline</i></button>
             </td>
         </tr>
     </tbody>
 </table>
+<div class="modal fade" id="modelComment" tabindex="-1" role="dialog" aria-labelledby="modelCommentLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modelCommentLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>

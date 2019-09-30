@@ -19,6 +19,10 @@ export class BlogServices {
     let apiGet = `${API.urlAPI}/blog/List`
     return this.http.get(apiGet)
   }
+  getListBlogAdmin(){
+    let apiGet = `${API.urlAPI}/admin/ListPost`
+    return this.http.get(apiGet)
+  }
 
   getDetailBlog(id, token: string) {
     let apiGet = `${API.urlAPI}/blog/get`
