@@ -11,8 +11,9 @@ import {ConditionalResponse} from '../../Utility/function'
 })
 
 export class CommentListAdmin implements OnInit, AfterViewInit {
-  isSelectItem: any
+  isSelectItem: any = null
   ListComment: []
+  isAniSaving: boolean= false
 
   constructor(private _commentService: CommentService, private _userService: UserService) { }
   ngOnInit(): void {
@@ -34,7 +35,32 @@ export class CommentListAdmin implements OnInit, AfterViewInit {
   }
   handlerEditComment(item) {
     this.isSelectItem = item
-    console.log(item)
   }
-
+  saveChangeComment(): void{
+    this.isAniSaving = true
+    let formData = new FormData()
+    formData.set('CommentID',this.isSelectItem.commentID)
+    formData.set('Content',this.isSelectItem.content)
+    formData.set('crDate',this.isSelectItem.crDate)
+    formData.set('UserID',this.isSelectItem.userID)
+    let token = this._userService.currentUser['token']
+    this._commentService.adminUpdateComment(formData,token).subscribe(
+      response => {
+        let status= response['status']
+        if(status===200) {
+          setTimeout(()=>{
+            this.isAniSaving = false
+          },1000)
+        }else if(status === 500){
+          this.isAniSaving = false
+          this.ngAfterViewInit()
+        } else {
+          ConditionalResponse(status,this._userService)
+        }
+      },
+      error => {
+        console.log(error)
+      }
+    )
+  }
 }

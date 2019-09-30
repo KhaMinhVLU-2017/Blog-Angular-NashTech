@@ -19,9 +19,9 @@ export class BlogServices {
     let apiGet = `${API.urlAPI}/blog/List`
     return this.http.get(apiGet)
   }
-  getListBlogAdmin(){
+  getListBlogAdmin(token: string){
     let apiGet = `${API.urlAPI}/admin/ListPost`
-    return this.http.get(apiGet)
+    return this.http.get(apiGet, { headers: { 'Authorization': token } })
   }
 
   getDetailBlog(id, token: string) {

@@ -29,4 +29,9 @@ export class CommentService{
     let url= `${API.urlAPI}/admin/comments`
     return this._http.get(url, { headers: { 'Authorization': token } })
   }
+
+  adminUpdateComment(data: FormData, token: string){
+    let url= `${API.urlAPI}/admin/UpdateComment`
+    return this._http.post(url,data,{headers: {'Authorization': token }})
+  }
 }

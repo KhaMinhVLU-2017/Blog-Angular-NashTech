@@ -4,6 +4,7 @@ export const ConditionalResponse = (status,_service) => {
     switch (status) {
         case 401:
             _service.changeMessageError('Token has expired')
+            _service.Logout()
             break
         case 403:
             _service.changeMessageError('You are Forbidden')

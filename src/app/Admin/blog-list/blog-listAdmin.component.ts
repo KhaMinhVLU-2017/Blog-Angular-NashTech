@@ -20,7 +20,8 @@ export class BlogListAdmin implements OnInit, AfterViewInit {
         this.linkServerIMG = `${API.urlServer}/assert/images`
     }
     ngAfterViewInit(): void {
-        this._blogService.getListBlogAdmin().subscribe(
+        let token = this._userService.currentUser['token']
+        this._blogService.getListBlogAdmin(token).subscribe(
             response => {
                 console.log(response)
                 let status = response['status']
