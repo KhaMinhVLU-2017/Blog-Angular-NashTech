@@ -8,4 +8,6 @@ const urlAPI =`${urlServer}/api`
 
 const urlRealtime = `${urlServer}/hubCentral`
 
-export {urlServer, urlAPI,urlRealtime}
+let milisecondStandard = 400
+
+export {urlServer, urlAPI,urlRealtime, milisecondStandard}

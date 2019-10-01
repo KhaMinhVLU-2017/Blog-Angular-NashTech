@@ -26,7 +26,7 @@
           <button class="btn btn-warning" data-toggle="modal" data-target="#modelComment"
             (click)='handlerEditComment(comment)'><i class="material-icons">edit</i></button>
           {{' '}}
-          <button class="btn btn-danger"><i class="material-icons">remove_circle_outline</i></button>
+          <button class="btn btn-danger" (click)='DeleteComment(comment.commentID)' ><i class="material-icons">remove_circle_outline</i></button>
         </td>
       </tr>
     </tbody>
@@ -37,8 +37,8 @@
     <span class="sr-only">Loading...</span>
   </div>
 </div>
-<div class="modal fade" id="modelComment" tabindex="-1" role="dialog" aria-labelledby="modelCommentLabel"
-  aria-hidden="true">
+<div class="modal fade" id="modelComment" tabindex="-1" role="dialog"
+  aria-labelledby="modelCommentLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -48,12 +48,11 @@
         </button>
       </div>
       <div class="modal-body">
-        <textarea class="form-control" rows="3" *ngIf="isSelectItem!==null"
+        <textarea (keyup)='keyEventTXA($event)' class="form-control" rows="3" *ngIf="isSelectItem!==null"
           [(ngModel)]='isSelectItem.content'></textarea>
       </div>
       <div class="modal-footer">
-
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" id='btn_CloseModal' class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" (click)='saveChangeComment()' data-dismiss="modal" class="btn btn-primary">Save
           changes</button>
       </div>
